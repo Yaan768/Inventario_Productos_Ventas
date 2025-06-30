@@ -33,11 +33,10 @@ int main() {
         cin.ignore(); 
 
         opcion = toupper(opcion); 
-
         switch(opcion) {
             case 'A': {
                 if (totalProductos >= MAX_PRODUCTOS) {
-                    cout << "No se puede registrar mas productos. Limite alcanzado.\n";
+                    cout << "No se puede registrar mas productos. Límite alcanzado.\n";
                 } else {
                     Producto nuevo;
                     cout << "Ingrese nombre del producto: ";
@@ -65,35 +64,55 @@ int main() {
                 }
                 break;
             }
-            case 'C':
-                cout << "Buscar un producto por nombre\n";
-                // en proceso 
+            case 'C': {
+                if (totalProductos == 0) {
+                    cout << "No hay productos para buscar.\n";
+                } else {
+                    string nombreBuscado;
+                    cout << "Ingrese el nombre del producto a buscar: ";
+                    getline(cin, nombreBuscado);
+
+                    bool encontrado = false;
+                    for (int i = 0; i < totalProductos; i++) {
+                        if (productos[i].nombre == nombreBuscado) {
+                            cout << "Producto encontrado: " << productos[i].nombre
+                                 << " | Precio: S/ " << productos[i].precio << endl;
+                            encontrado = true;
+                            break;
+                        }
+                    }
+
+                    if (!encontrado) {
+                        cout << "Producto no encontrado.\n";
+                    }
+                }
                 break;
+            }
             case 'D':
                 cout << "Actualizar los datos de un producto\n";
                 // en proceso 
                 break;
             case 'E':
                 cout << "Eliminar un producto\n";
-                // en proceso 
+                // en proceso
                 break;
             case 'F':
                 cout << "Registrar una venta\n";
-                // en proceso 
+                // en proceso
                 break;
             case 'G':
                 cout << "Listar las ventas realizadas\n";
-                // en proceso 
+                // en proceso
                 break;
             case 'H':
                 cout << "Calcular el total de ventas realizadas\n";
-                // en proceso 
+                // en proceso
                 break;
             case 'S':
                 cout << "Saliendo del programa...\n";
                 break;
             default:
-                cout << "Opcion no valida. Intente de nuevo.\n";
+                cout << "Opción no válida. Intente de nuevo.\n";
         }
 
         cout << endl;
@@ -102,4 +121,5 @@ int main() {
 
     return 0;
 }
+
 
