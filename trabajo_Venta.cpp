@@ -194,10 +194,20 @@ int main() {
                 }
                 break;
             }
-            case 'G':
-                cout << "Listar las ventas realizadas\n";
-                // en proceso
+            case 'G': {
+                if (totalVentas == 0) {
+                    cout << "No hay ventas registradas.\n";
+                } else {
+                    cout << "\n--- Lista de Ventas Realizadas ---\n";
+                    for (int i = 0; i < totalVentas; i++) {
+                        cout << "Venta ID: " << ventas[i].idVenta
+                             << " | Producto: " << ventas[i].producto
+                             << " | Cantidad: " << ventas[i].cantidad
+                             << " | Total: S/ " << ventas[i].precioTotal << endl;
+                    }
+                }
                 break;
+            }
             case 'H':
                 cout << "Calcular el total de ventas realizadas\n";
                 // en proceso
@@ -215,6 +225,7 @@ int main() {
 
     return 0;
 }
+
 
 
 
