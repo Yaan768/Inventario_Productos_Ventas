@@ -208,10 +208,18 @@ int main() {
                 }
                 break;
             }
-            case 'H':
-                cout << "Calcular el total de ventas realizadas\n";
-                // en proceso
+            case 'H': {
+                if (totalVentas == 0) {
+                    cout << "No hay ventas registradas para calcular.\n";
+                } else {
+                    float sumaTotal = 0;
+                    for (int i = 0; i < totalVentas; i++) {
+                        sumaTotal += ventas[i].precioTotal;
+                    }
+                    cout << "El total de todas las ventas realizadas es: S/ " << sumaTotal << endl;
+                }
                 break;
+            }
             case 'S':
                 cout << "Saliendo del programa...\n";
                 break;
@@ -225,6 +233,7 @@ int main() {
 
     return 0;
 }
+
 
 
 
