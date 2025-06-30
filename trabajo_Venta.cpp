@@ -37,7 +37,7 @@ int main() {
         switch(opcion) {
             case 'A': {
                 if (totalProductos >= MAX_PRODUCTOS) {
-                    cout << "No se puede registrar mas productos. Limite alcanzado.\n";
+                    cout << "No se puede registrar más productos. Límite alcanzado.\n";
                 } else {
                     Producto nuevo;
                     cout << "Ingrese nombre del producto: ";
@@ -117,10 +117,34 @@ int main() {
                 }
                 break;
             }
-            case 'E':
-                cout << "Eliminar un producto\n";
-                // en proceso
+            case 'E': {
+                if (totalProductos == 0) {
+                    cout << "No hay productos para eliminar.\n";
+                } else {
+                    string nombreEliminar;
+                    cout << "Ingrese el nombre del producto a eliminar: ";
+                    getline(cin, nombreEliminar);
+
+                    bool eliminado = false;
+                    for (int i = 0; i < totalProductos; i++) {
+                        if (productos[i].nombre == nombreEliminar) {
+                            // Desplazar todos los productos hacia atrás
+                            for (int j = i; j < totalProductos - 1; j++) {
+                                productos[j] = productos[j + 1];
+                            }
+                            totalProductos--;
+                            cout << "Producto eliminado exitosamente.\n";
+                            eliminado = true;
+                            break;
+                        }
+                    }
+
+                    if (!eliminado) {
+                        cout << "Producto no encontrado.\n";
+                    }
+                }
                 break;
+            }
             case 'F':
                 cout << "Registrar una venta\n";
                 // en proceso
@@ -131,7 +155,7 @@ int main() {
                 break;
             case 'H':
                 cout << "Calcular el total de ventas realizadas\n";
-                // en proceso 
+                // en proceso
                 break;
             case 'S':
                 cout << "Saliendo del programa...\n";
@@ -146,5 +170,6 @@ int main() {
 
     return 0;
 }
+
 
 
