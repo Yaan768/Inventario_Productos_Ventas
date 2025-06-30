@@ -3,14 +3,25 @@
 using namespace std;
 
 const int MAX_PRODUCTOS = 100;
+const int MAX_VENTAS = 100;
 
 struct Producto {
     string nombre;
     float precio;
 };
 
+struct Venta {
+    int idVenta;
+    string producto;
+    int cantidad;
+    float precioTotal;
+};
+
 Producto productos[MAX_PRODUCTOS];
 int totalProductos = 0;
+
+Venta ventas[MAX_VENTAS];
+int totalVentas = 0;
 
 int main() {
     char opcion;
@@ -128,7 +139,6 @@ int main() {
                     bool eliminado = false;
                     for (int i = 0; i < totalProductos; i++) {
                         if (productos[i].nombre == nombreEliminar) {
-                            // Desplazar todos los productos hacia atrás
                             for (int j = i; j < totalProductos - 1; j++) {
                                 productos[j] = productos[j + 1];
                             }
@@ -145,10 +155,45 @@ int main() {
                 }
                 break;
             }
-            case 'F':
-                cout << "Registrar una venta\n";
-                // en proceso
+            case 'F': {
+                if (totalProductos == 0) {
+                    cout << "No hay productos disponibles para vender.\n";
+                } else if (totalVentas >= MAX_VENTAS) {
+                    cout << "No se puede registrar más ventas. Límite alcanzado.\n";
+                } else {
+                    string nombreProducto;
+                    cout << "Ingrese el nombre del producto a vender: ";
+                    getline(cin, nombreProducto);
+
+                    int indice = -1;
+                    for (int i = 0; i < totalProductos; i++) {
+                        if (productos[i].nombre == nombreProducto) {
+                            indice = i;
+                            break;
+                        }
+                    }
+
+                    if (indice == -1) {
+                        cout << "Producto no encontrado.\n";
+                    } else {
+                        Venta nuevaVenta;
+                        nuevaVenta.idVenta = totalVentas + 1;
+                        nuevaVenta.producto = nombreProducto;
+
+                        cout << "Ingrese la cantidad vendida: ";
+                        cin >> nuevaVenta.cantidad;
+                        cin.ignore();
+
+                        nuevaVenta.precioTotal = productos[indice].precio * nuevaVenta.cantidad;
+
+                        ventas[totalVentas] = nuevaVenta;
+                        totalVentas++;
+
+                        cout << "Venta registrada exitosamente. Total: S/ " << nuevaVenta.precioTotal << endl;
+                    }
+                }
                 break;
+            }
             case 'G':
                 cout << "Listar las ventas realizadas\n";
                 // en proceso
@@ -170,6 +215,7 @@ int main() {
 
     return 0;
 }
+
 
 
 
