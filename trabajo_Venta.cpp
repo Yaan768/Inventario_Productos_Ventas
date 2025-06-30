@@ -37,7 +37,7 @@ int main() {
         switch(opcion) {
             case 'A': {
                 if (totalProductos >= MAX_PRODUCTOS) {
-                    cout << "No se puede registrar más productos. Límite alcanzado.\n";
+                    cout << "No se puede registrar mas productos. Limite alcanzado.\n";
                 } else {
                     Producto nuevo;
                     cout << "Ingrese nombre del producto: ";
@@ -53,29 +53,37 @@ int main() {
                 }
                 break;
             }
-            case 'B':
-                cout << "Listar los productos registrados\n";
-                // en proceso
+            case 'B': {
+                if (totalProductos == 0) {
+                    cout << "No hay productos registrados.\n";
+                } else {
+                    cout << "\n--- Lista de Productos ---\n";
+                    for (int i = 0; i < totalProductos; i++) {
+                        cout << i + 1 << ". Nombre: " << productos[i].nombre
+                             << " | Precio: S/ " << productos[i].precio << endl;
+                    }
+                }
                 break;
+            }
             case 'C':
                 cout << "Buscar un producto por nombre\n";
-                // en proceso
+                // en proceso 
                 break;
             case 'D':
                 cout << "Actualizar los datos de un producto\n";
-                // en proceso
+                // en proceso 
                 break;
             case 'E':
                 cout << "Eliminar un producto\n";
-                // en proceso
+                // en proceso 
                 break;
             case 'F':
                 cout << "Registrar una venta\n";
-                // en proceso
+                // en proceso 
                 break;
             case 'G':
                 cout << "Listar las ventas realizadas\n";
-                // en proceso
+                // en proceso 
                 break;
             case 'H':
                 cout << "Calcular el total de ventas realizadas\n";
